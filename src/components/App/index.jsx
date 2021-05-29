@@ -3,7 +3,7 @@ import { Footer } from '../Footer';
 import { Header } from '../Header';
 import { Home } from '../Home';
 import { Reservation } from '../Reservation';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 export const App = () => {
   return (
@@ -13,7 +13,7 @@ export const App = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/reservation">
+        <Route path="/reservation/:id">
           <Reservation />
         </Route>
       </Switch>
