@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import './style.css';
 import { Seat } from '../Seat';
-export const SeatPicker = () => {
+import { SeatRow } from '../SeatRow';
+
+export const SeatPicker = ({ seats, journeyId }) => {
   return (
     <div className="seat-picker container">
       <h2>Vyberte sedadlo</h2>
       <div className="seats">
-        <Seat number="33" />
-        <Seat number="17" />
-        <Seat number="5" />
+        {seats.map((row, index) => (
+          <SeatRow key={index} row={row} />
+        ))}
       </div>
       <button className="btn" type="button">
         Rezervovat
