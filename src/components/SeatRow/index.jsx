@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Seat } from '../Seat';
 
-export const SeatRow = ({ row }) => {
+export const SeatRow = ({ row, onSeatSelected, selectedSeatNumber }) => {
   return (
     <div className="seat-row">
       {row.map((seat) => (
@@ -9,6 +9,8 @@ export const SeatRow = ({ row }) => {
           key={seat.number}
           number={seat.number}
           isOccupied={seat.isOccupied}
+          isSelected={selectedSeatNumber === seat.number}
+          onSelect={onSeatSelected}
         />
       ))}
     </div>

@@ -58,7 +58,9 @@ export const JourneyPicker = ({ onJourneyChange }) => {
           <label>
             <div className="journey-picker__label">Kam:</div>
             <select onChange={handleToCityChange} value={toCity}>
-              <CityOptions cities={cities} />
+              <CityOptions
+                cities={cities.filter(({ code }) => code !== fromCity)}
+              />
             </select>
           </label>
           <label>
