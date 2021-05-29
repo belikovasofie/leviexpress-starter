@@ -34,9 +34,14 @@ export const JourneyPicker = ({ onJourneyChange }) => {
     setDate(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(fromCity, toCity, date);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    fetch(
+      `https://leviexpress-backend.herokuapp.com/api/journey?fromCity=${fromCity}&toCity=${toCity}&date=${date}`,
+    )
+      .then((resp) => resp.json())
+      .then((json) => onJourneyChange(json.data));
   };
 
   return (
@@ -63,7 +68,11 @@ export const JourneyPicker = ({ onJourneyChange }) => {
             </select>
           </label>
           <div className="journey-picker__controls">
-            <button className="btn" type="submit">
+            <button
+              className="btn"
+              type="submit"
+              disabled={date === '' || cities === ''}
+            >
               Vyhledat spoj
             </button>
           </div>
