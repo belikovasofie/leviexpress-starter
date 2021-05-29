@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import mapImage from './img/map.svg';
 import './style.css';
+import CityOptions from '../CityOptions';
 
 export const JourneyPicker = ({ onJourneyChange }) => {
+  const [cities, setCities] = useState([]);
   const [fromCity, setFromCity] = useState('');
   const [toCity, setToCity] = useState('');
   const [date, setDate] = useState('');
+
+  useEffect(() => {
+    fetch('https://leviexpress-backend.herokuapp.com/api/cities')
+      .then((resp) => resp.json())
+      .then((json) => setCities(json.data));
+  }, []);
 
   const handleFromCityChange = (e) => {
     setFromCity(e.target.value);
@@ -30,23 +38,13 @@ export const JourneyPicker = ({ onJourneyChange }) => {
           <label>
             <div className="journey-picker__label">Odkud:</div>
             <select onChange={handleFromCityChange} value={fromCity}>
-              <option value="">Vyberte</option>
-              <option value="mesto01">Město 01</option>
-              <option value="mesto02">Město 02</option>
-              <option value="mesto03">Město 03</option>
-              <option value="mesto04">Město 04</option>
-              <option value="mesto05">Město 05</option>
+              <CityOptions cities={cities} />
             </select>
           </label>
           <label>
             <div className="journey-picker__label">Kam:</div>
             <select onChange={handleToCityChange} value={toCity}>
-              <option value="">Vyberte</option>
-              <option value="mesto01">Město 01</option>
-              <option value="mesto02">Město 02</option>
-              <option value="mesto03">Město 03</option>
-              <option value="mesto04">Město 04</option>
-              <option value="mesto05">Město 05</option>
+              <CityOptions cities={cities} />
             </select>
           </label>
           <label>
